@@ -11,6 +11,7 @@ with app.app_context():
 
     Restaurant.query.delete()
     Pizza.query.delete()
+    # RestaurantPizza.query.delete()
 
     restaurants = []
     for i in range(30):
@@ -23,8 +24,7 @@ with app.app_context():
     for i in range(100):
         p = Pizza(
             name=fake.color_name(),
-            ingredients="Dough, Tomato Sauce, Cheese, Pepperoni",
-            price=randint(1, 30)
+            ingredients="Dough, Tomato Sauce, Cheese, Pepperoni"
         )
         pizzas.append(p)
 
