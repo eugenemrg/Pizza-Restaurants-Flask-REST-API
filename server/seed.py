@@ -3,7 +3,7 @@ from random import randint, choice as rc
 from faker import Faker
 
 from app import app
-from models import db, Restaurant, Pizza
+from models import db, Restaurant, Pizza, RestaurantPizza
 
 fake = Faker()
 
@@ -11,7 +11,7 @@ with app.app_context():
 
     Restaurant.query.delete()
     Pizza.query.delete()
-    # RestaurantPizza.query.delete()
+    RestaurantPizza.query.delete()
 
     restaurants = []
     for i in range(30):
@@ -29,5 +29,20 @@ with app.app_context():
         pizzas.append(p)
 
     db.session.add_all(pizzas)
+    db.session.commit()
+    
+    restaurant_pizzas = []
+    for i in range(200):
+        p = rc(pizzas)
+        r = rc(restaurants)
+        
+        pr = RestaurantPizza(
+            price = randint(1, 30),
+            pizza = rc(pizzas),
+            restaurant = rc(restaurants)
+        )
+        restaurant_pizzas.append(pr)
+    
+    db.session.add_all(restaurant_pizzas)
     db.session.commit()
     

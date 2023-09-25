@@ -10,6 +10,9 @@ flask-migrate = "*"
 flask-sqlalchemy = "*"
 sqlalchemy-serializer = "*"
 flask-restful = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+flask-swagger-ui = "*"
 
 [dev-packages]
 
