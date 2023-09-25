@@ -7,7 +7,6 @@ from models import db, Restaurant, Pizza
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///eateries.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 migrate = Migrate(app, db)
 db.init_app(app)
@@ -31,14 +30,14 @@ class Index(Resource):
 
 api.add_resource(Index, '/')
 
-class Restaurant(Resource):
+class Restaurants(Resource):
 
     def get(self):
-
-        response_dict_list = [n.to_dict() for n in Restaurant.query.all()]
+        Restaurant.query.all()
+        response_dict_list = [r.to_dict() for r in Restaurant.query.all()]
 
         response = make_response(
-            jsonify(response_dict_list),
+            response_dict_list,
             200,
         )
 
@@ -63,7 +62,7 @@ class Restaurant(Resource):
 
         return response
 
-api.add_resource(Restaurant, '/restaurants')
+api.add_resource(Restaurants, '/restaurants')
 
 class RestaurantByID(Resource):
 
@@ -114,7 +113,7 @@ class RestaurantByID(Resource):
 
 api.add_resource(RestaurantByID, '/restaurants/<int:id>')
 
-class Pizza(Resource):
+class Pizzas(Resource):
 
     def get(self):
 
@@ -127,7 +126,7 @@ class Pizza(Resource):
 
         return response
 
-api.add_resource(Pizza, '/pizzas')
+api.add_resource(Pizzas, '/pizzas')
 
 class RestaurantPizzas(Resource):
     
@@ -139,4 +138,4 @@ api.add_resource(RestaurantPizzas, '/restaurants_pizzas')
 
 
 if __name__ == '__main__':
-    app.run(port=5555)
+    app.run(port=5556, debug=True)
