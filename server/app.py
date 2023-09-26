@@ -18,15 +18,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     API_URL,
     config={  # Swagger UI config overrides
         'app_name': "Restaurants REST API 1.0"
-    },
-    # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
-    #    'clientId': "your-client-id",
-    #    'clientSecret': "your-client-secret-if-required",
-    #    'realm': "your-realms",
-    #    'appName': "your-app-name",
-    #    'scopeSeparator': " ",
-    #    'additionalQueryStringParams': {'test': "hello"}
-    # }
+    }
 )
 
 app.register_blueprint(swaggerui_blueprint)
@@ -64,7 +56,7 @@ restaurants_schema = RestaurantsSchema()
 class RestaurantPizzaSchema(ma.Schema):
     class Meta:
         fields = ('price', 'pizza_id', 'restaurant_id')
-        include_fk = True
+        # include_fk = True
 
 pr_schema = RestaurantPizzaSchema()
 
